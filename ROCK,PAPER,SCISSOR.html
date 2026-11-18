@@ -1,0 +1,179 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Rock Paper Scissors</title>
+
+  <style>
+    * {
+      box-sizing: border-box;
+    }
+
+    body {
+      margin: 0;
+      min-height: 100vh;
+      display: grid;
+      place-items: center;
+      background: #111827;
+      color: white;
+      font-family: Arial, sans-serif;
+    }
+
+    .game {
+      width: min(90%, 520px);
+      padding: 32px;
+      text-align: center;
+      border-radius: 18px;
+      background: #1f2937;
+      box-shadow: 0 15px 40px rgba(0, 0, 0, 0.35);
+    }
+
+    h1 {
+      margin-top: 0;
+    }
+
+    .scoreboard {
+      display: flex;
+      justify-content: space-around;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    .score {
+      flex: 1;
+      padding: 14px;
+      border-radius: 12px;
+      background: #374151;
+    }
+
+    .score-number {
+      display: block;
+      margin-top: 6px;
+      color: #60a5fa;
+      font-size: 2rem;
+      font-weight: bold;
+    }
+
+    .choices {
+      display: flex;
+      justify-content: center;
+      gap: 12px;
+      margin: 24px 0;
+    }
+
+    button {
+      border: 0;
+      padding: 12px 18px;
+      border-radius: 10px;
+      background: #2563eb;
+      color: white;
+      font-size: 1rem;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    button:hover {
+      background: #1d4ed8;
+      transform: translateY(-2px);
+    }
+
+    .results {
+      padding: 16px;
+      border-radius: 12px;
+      background: #374151;
+      text-align: left;
+    }
+
+    
+  </style>
+</head>
+
+<body>
+  <main class"game">
+    <h1 id="result">Choose Rock, Paper, or Scissors</h1>
+
+    <section class="scoreboard">
+      <div class="score">
+        You
+        <span class="score-number" id="userScore">0</span>
+      </div>
+
+      <div class="score">
+        Draws
+        <span class="score-number" id="drawScore">0</span>
+      </div>
+
+      <div class="score">
+        Computer
+        <span class="score-number" id="computerScore">0</span>
+      </div>
+    </section>
+
+    <div class="choices">
+      <button onclick="playGame('Rock')">Rock</button>
+      <button onclick="playGame('Paper')">Paper</button>
+      <button onclick="playGame('Scissors')">Scissors</button>
+    </div>
+
+    <section class="results">
+      <p>You: <span id="userResult"></span></p>
+      <p>Computer choice: <span id="computerResult"></span></p>
+    </section>
+  </main>
+
+  <script>
+    let userScore = 0
+    let drawScore = 0
+    let computerScore = 0
+
+    function playGame(userChoice){
+    const result = document.getElementById('result')
+      const userResult = document.getElementById('userResult')
+      const computerResult = document.getElementById('computerResult')
+
+       let computer
+      let randomChoice = Math.floor(Math.random() * 3) + 1
+        console.log(randomChoice)
+      if(randomChoice ==1){
+        computer = 'Rock'
+      }else if(randomChoice ==2){
+        computer = 'Scissors'
+      }else{
+        computer = 'Paper'
+      }
+
+      console.log(computer)
+
+
+      if(userChoice == 'Rock' && computer == 'Scissors'){
+        result.innerText = 'YOU WIN!' 
+        userScore++ 
+      }else if(userChoice == 'Scissors' && computer == 'Paper'){
+        result.innerText = 'YOU WIN'
+        userScore++
+      }else if(userChoice =='Paper' && computer =='Rock'){
+        result.innerText = 'YOU WIN'
+        userScore++
+      }else if(userChoice == computer){
+        result.innerText = 'DRAW'
+        drawScore++
+      }
+      else{
+        result.innerText = 'YOU LOSE'
+        computerScore++
+      }
+
+
+      userResult.innerText = userChoice
+      computerResult.innerText = computer
+
+
+      document.getElementById('userScore').innerText = userScore
+      document.getElementById('computerScore').innerText = computerScore
+      document.getElementById('drawScore').innerText = drawScore
+    }
+    
+  </script>
+</body>
+</html>
